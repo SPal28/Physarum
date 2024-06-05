@@ -1,9 +1,9 @@
-#citing geeksforgeeks.com for vidoe extraction method 
+#citing geeksforgeeks.com for video extraction method 
 import cv2 
 import os 
 
 
-vid = cv2.VideoCapture("C:/Users/subhangipal/Documents/Physarum/video/smooth_240104_1_MA062_01.mp4") 
+vid = cv2.VideoCapture("/Users/subhangipal/Documents/Physarum/video/smooth_240104_1_MA062_01.mp4") 
 
 
 try: 
