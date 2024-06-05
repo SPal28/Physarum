@@ -1,42 +1,42 @@
-# Importing all necessary libraries 
+#citing geeksforgeeks.com for vidoe extraction method 
 import cv2 
 import os 
 
-# Read the video from specified path 
-cam = cv2.VideoCapture("C:\\Users\\subhangipal\\Documents\\Physarum\\video\\smooth_240104_1_MA062_01.mp4") 
+
+vid = cv2.VideoCapture("C:/Users/subhangipal/Documents/Physarum/video/smooth_240104_1_MA062_01.mp4") 
+
 
 try: 
 	
-	# creating a folder named data 
+	 
 	if not os.path.exists('data'): 
 		os.makedirs('data') 
 
-# if not created then raise error 
+ 
 except OSError: 
 	print ('Error: Creating directory of data') 
 
-# frame 
+ 
 currentframe = 0
 
 while(True): 
 	
-	# reading from frame 
-	ret,frame = cam.read() 
+	 
+	ret,frame = vid.read() 
 
 	if ret: 
-		# if video is still left continue creating images 
+		 
 		name = './data/frame' + str(currentframe) + '.jpg'
 		print ('Creating...' + name) 
 
-		# writing the extracted images 
+		 
 		cv2.imwrite(name, frame) 
 
-		# increasing counter so that it will 
-		# show how many frames are created 
+		 
 		currentframe += 1
 	else: 
 		break
 
-# Release all space and windows once done 
-cam.release() 
+
+vid.release() 
 cv2.destroyAllWindows() 
