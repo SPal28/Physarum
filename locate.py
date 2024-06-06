@@ -1,7 +1,7 @@
 
 import numpy as np 
 import cv2 as cv
-img = cv.imread('/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg')
+img = cv.imread("/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg")
 output = img.copy()
 
 #convert image to grayscale
