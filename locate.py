@@ -1,4 +1,3 @@
-
 import numpy as np 
 import cv2 as cv
 
@@ -18,4 +17,3 @@ for (x, y, r) in circles:
 cv.imshow('output', output)
 cv.waitKey(0)
 cv.destroyAllWindows()
-
