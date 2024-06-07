@@ -12,10 +12,11 @@ gray = cv.medianBlur(gray, 5)
 
 circles = cv.HoughCircles(gray, cv.HOUGH_GRADIENT, 1, 20, param1=50, param2=30, minRadius=0, maxRadius=0)
 detected_circles = np.uint16(np.around(circles))
-for value in detected_circles:
-    x, y, r = value
+for i in detected_circles[0, :]:
+#for value in detected_circles:
+    x, y, r = i
+    cv.circle(output, (x, y), r, (0, 255, 0), 4)
     cv.circle(output, (x, y), 2, (0, 255, 0), 4)
-
 
 cv.imshow('output', output)
 cv.waitKey(0)
