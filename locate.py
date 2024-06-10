@@ -10,7 +10,7 @@ gray = cv.medianBlur(gray, 5)
 
 #using circles method from pyimagesearch
 
-circles = cv.HoughCircles(gray, cv.HOUGH_GRADIENT, 1, 20, param1=50, param2=30, minRadius=0, maxRadius=0)
+circles = cv.HoughCircles(gray, cv.HOUGH_GRADIENT, 1, 20, param1=50, param2=30, minRadius=150, maxRadius=200)
 detected_circles = np.uint16(np.around(circles))
 for i in detected_circles[0, :]:
 #for value in detected_circles:
