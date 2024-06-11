@@ -1,38 +1,42 @@
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+import numpy as np 
+import cv2 as cv
 
-# Read the image
-img = cv2.imread('/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg')
+# Load the image
+img = cv.imread('/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg')
 output = img.copy()
 
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# Convert image to grayscale
+# gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
-# Apply median blur
-gray = cv2.medianBlur(gray, 5)
+# Apply histogram equalization to improve contrast
+# gray = cv.equalizeHist(gray)
 
-# Enhance edges using adaptive thresholding
-gray = cv2.adaptiveThreshold(
-    gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
+# Apply a larger median blur to reduce noise
+# gray = cv.medianBlur(gray, 11)
 
-# Apply Hough Circle Transform with adjusted parameters
-circles = cv2.HoughCircles(
-    gray, 
-    cv2.HOUGH_GRADIENT, dp=1.5, minDist=500,
-    param1=100, param2=30, 
-    minRadius=300, maxRadius=600
-)
+# Apply Canny edge detection
+#edges = cv.Canny(gray, 100, 200)
 
-# If some circles are detected, let's draw them
+# Use HoughCircles to detect circles
+circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=200,
+                          param1=100, param2=30, minRadius=100, maxRadius=300)
+
+# Check if circles were found
 if circles is not None:
-    circles = np.round(circles[0, :]).astype("int")
-    for (x, y, r) in circles:
-        cv2.circle(img, (x, y), r, (0, 255, 0), 4)
-        cv2.rectangle(img, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+    detected_circles = np.uint16(np.around(circles))
+    num_circles = len(detected_circles[0])
+    print(f"Number of detected circles: {num_circles}")
+    for i in detected_circles[0, :]:
+        x, y, r = i
+        cv.circle(output, (x, y), r, (0, 255, 0), 4)
+        cv.circle(output, (x, y), 2, (0, 255, 0), 4)
 
-# Display the output
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.axis('off')
-plt.show()
+    # Display the output image
+    cv.imshow('output', output)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+    # Optionally save the output image
+    cv.imwrite('/mnt/data/output.png', output)
+else:
+    print("No circles were detected.")
