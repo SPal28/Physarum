@@ -1,18 +1,28 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-# Apply Hough Circle Transform with further refined parameters
+
+# Read the image
 img = cv2.imread('/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg')
 output = img.copy()
 
+# Convert to grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Apply median blur
 gray = cv2.medianBlur(gray, 5)
 
+# Enhance edges using adaptive thresholding
+gray = cv2.adaptiveThreshold(
+    gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+# Apply Hough Circle Transform with adjusted parameters
 circles = cv2.HoughCircles(
     gray, 
     cv2.HOUGH_GRADIENT, dp=1.5, minDist=500,
-    param1=100, param2=60, 
-    minRadius=350, maxRadius=450
+    param1=100, param2=30, 
+    minRadius=300, maxRadius=600
 )
 
 # If some circles are detected, let's draw them
