@@ -18,8 +18,8 @@ output = img.copy()
 #edges = cv.Canny(gray, 100, 200)
 
 # Use HoughCircles to detect circles
-circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=200,
-                          param1=100, param2=30, minRadius=100, maxRadius=300)
+circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=2000,
+                          param1=100, param2=30, minRadius=1000, maxRadius=1500)
 
 # Check if circles were found
 if circles is not None:
