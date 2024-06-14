@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/physarum frames data/frame0.jpg')
+img = cv.imread('/Users/subhangipal/Downloads/MA064.1_049 (Large).jpg')
 output = img.copy()
 
 # Convert image to grayscale
