@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/6 petri dishes frames/MA074.2_008 (Large).jpg')
+img = cv.imread('/Users/subhangipal/Documents/Physarum/split images/split images_5.png')
 output = img.copy()
 
 # Convert image to grayscale
