@@ -1,0 +1,42 @@
+import numpy as np 
+import cv2 as cv
+
+# Load the image
+img = cv.imread('/Users/subhangipal/Documents/Physarum/split images/split images_6.png')
+output = img.copy()
+
+# Convert image to grayscale
+# gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+# Apply histogram equalization to improve contrast
+# gray = cv.equalizeHist(gray)
+
+# Apply a larger median blur to reduce noise
+# gray = cv.medianBlur(gray, 11)
+
+# Apply Canny edge detection
+#edges = cv.Canny(gray, 100, 200)
+
+# Use HoughCircles to detect circles
+circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=400,
+                          param1=100, param2=30, minRadius=200, maxRadius=400)
+
+# Check if circles were found
+if circles is not None:
+    detected_circles = np.uint16(np.around(circles))
+    num_circles = len(detected_circles[0])
+    print(f"Number of detected circles: {num_circles}")
+    for i in detected_circles[0, :]:
+        x, y, r = i
+        cv.circle(output, (x, y), r, (0, 255, 0), 4)
+        cv.circle(output, (x, y), 2, (0, 255, 0), 4)
+
+    # Display the output image
+    cv.imshow('output', output)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+    # Optionally save the output image
+    cv.imwrite('/Users/subhangipal/Documents/Physarum/indentified circles/indentified circle 6.png', output)
+else:
+    print("No circles were detected.")
