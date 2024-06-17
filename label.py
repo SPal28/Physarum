@@ -36,7 +36,7 @@ for row, col, number in numbering_pattern:
     cv.putText(img, str(number), (x_center - 10, y_center + 10), font, font_scale, font_color, thickness, line_type)
 
 # Save the labeled image
-cv.imwrite('/path/to/save/labeled_image.png', img)  # Update the path to save the labeled image
+cv.imwrite('/Users/subhangipal/Documents/Physarum/numbered image/6 labeled petri dishes.png', img)  # Update the path to save the labeled image
 
 # Display the labeled image
 cv.imshow('Labeled Image', img)

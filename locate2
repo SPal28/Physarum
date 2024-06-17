@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/split images/split images_5.png')
+img = cv.imread('/Users/subhangipal/Documents/Physarum/split images/split images_6.png')
 output = img.copy()
 
 # Convert image to grayscale
@@ -37,6 +37,6 @@ if circles is not None:
     cv.destroyAllWindows()
 
     # Optionally save the output image
-    cv.imwrite('/mnt/data/output.png', output)
+    cv.imwrite('/Users/subhangipal/Documents/Physarum/indentified circles/indentified circle 6.png', output)
 else:
     print("No circles were detected.")

@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+from matplotlib import pyplot as plt
 
 # Load the image
-image_path = '/Users/subhangipal/Documents/Physarum/indentified circles/circles.png'
+image_path = '/Users/subhangipal/Documents/Physarum/indentified circles/indentified circle 6.png'
 image = cv2.imread(image_path)
 
 # Convert the image to HSV color space
@@ -22,28 +23,29 @@ if contours:
     largest_contour = max(contours, key=cv2.contourArea)
     
     # Create a mask with the same dimensions as the image
-    circle_mask = np.zeros_like(image)
+    circle_mask = np.zeros_like(image, dtype=np.uint8)
     
     # Draw the green circle contour on the mask
     cv2.drawContours(circle_mask, [largest_contour], -1, (255, 255, 255), thickness=cv2.FILLED)
     
-    # Convert the mask to grayscale
-    circle_mask_gray = cv2.cvtColor(circle_mask, cv2.COLOR_BGR2GRAY)
-    
-    # Create a masked image where the green circle is kept, and everything else is black
-    result = cv2.bitwise_and(image, image, mask=circle_mask_gray)
-    
-    # Optionally, you can make the background transparent
     # Create an alpha channel based on the circle mask
-    alpha_channel = np.where(circle_mask_gray == 255, 255, 0).astype(np.uint8)
+    alpha_channel = np.zeros_like(mask, dtype=np.uint8)
+    alpha_channel[circle_mask[:, :, 0] == 255] = 255
     
-    # Add the alpha channel to the result image
-    b, g, r = cv2.split(result)
-    result_with_alpha = cv2.merge([b, g, r, alpha_channel])
+    # Create a 4-channel image (BGR + Alpha)
+    b, g, r = cv2.split(image)
+    result = cv2.merge([b, g, r, alpha_channel])
     
     # Save the result
-    result_path = '/Users/subhangipal/Documents/Physarum/removed background/removed backgrund.png'
-    cv2.imwrite(result_path, result_with_alpha)
+    result_path = '/mnt/data/removed_background.png'
+    cv2.imwrite(result_path, result)
+    
+    # Display the result
+    plt.figure(figsize=(10, 10))
+    plt.axis('off')
+    plt.title('Background Removed')
+    plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGRA2RGBA))
+    plt.show()
     
     print(f"Background removed image saved to {result_path}")
 else:

@@ -1,7 +1,7 @@
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/6 petri dishes frames/MA074.2_008 (Large).jpg')  # Update the path to your local image
+img = cv.imread('/Users/subhangipal/Documents/Physarum/numbered image/6 labeled petri dishes.png')  # Update the path to your local image
 
 # Check if the image is loaded correctly
 if img is None:
