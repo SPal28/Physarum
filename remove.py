@@ -48,4 +48,3 @@ if contours:
     print(f"Background removed image saved to {result_path}")
 else:
     print("No green circle found.")
-
