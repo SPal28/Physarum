@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/split images/split images_6.png')
+img = cv.imread('/Users/subhangipal/Documents/Physarum/6 petri dishes frames/MA074.2_008 (Large).jpg')
 output = img.copy()
 
 # Convert image to grayscale
@@ -19,7 +19,7 @@ output = img.copy()
 
 # Use HoughCircles to detect circles
 circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=400,
-                          param1=100, param2=30, minRadius=200, maxRadius=400)
+                          param1=100, param2=30, minRadius=200, maxRadius=450)
 
 # Check if circles were found
 if circles is not None:
@@ -28,8 +28,8 @@ if circles is not None:
     print(f"Number of detected circles: {num_circles}")
     for i in detected_circles[0, :]:
         x, y, r = i
-        cv.circle(output, (x, y), r, (0, 255, 0), 4)
-        cv.circle(output, (x, y), 2, (0, 255, 0), 4)
+        cv.circle(output, (x, y), r, (0, 255, 0), 10)
+        cv.circle(output, (x, y), 2, (0, 255, 0), 10)
 
     # Display the output image
     cv.imshow('output', output)
