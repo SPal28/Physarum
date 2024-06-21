@@ -1,7 +1,7 @@
 import cv2 as cv
 
 # Load the image
-img = cv.imread('/Users/subhangipal/Documents/Physarum/6 petri dishes frames/MA074.2_008 (Large).jpg')  # Update the path to your local image
+img = cv.imread('/mnt/exDisk1/Japanese Mass Assays/test/MA074.2_008 (Large).jpg')  # Update the path to your local image
 
 # Check if the image is loaded correctly
 if img is None:
@@ -39,6 +39,6 @@ for row, col, number in numbering_pattern:
 cv.imwrite('/Users/subhangipal/Documents/Physarum/numbered image/6 labeled petri dishes.png', img)  # Update the path to save the labeled image
 
 # Display the labeled image
-cv.imshow('Labeled Image', img)
-cv.waitKey(0)
-cv.destroyAllWindows()
+# cv.imshow('Labeled Image', img)
+# cv.waitKey(0)
+# cv.destroyAllWindows()
