@@ -44,7 +44,7 @@ def calculate_rotation_angle(img):
     for contour in contours:
         if 5 < cv.contourArea(contour) < 100:  # Filtering small contours
             (x, y), radius = cv.minEnclosingCircle(contour)
-            if radius < 10:  # Filtering based on size
+            if radius < 20:  # Filtering based on size
                 centers.append((x, y))
 
     if len(centers) >= 2:
