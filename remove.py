@@ -60,7 +60,7 @@ def remove_background(img, save_path):
         print("No green circle found.")
 
 # Load the original image
-img_path = '/Users/subhangipal/Documents/Physarum/6 petri dishes frames/MA074.2_008 (Large).jpg'
+img_path = '/Users/subhangipal/Documents/Physarum/indentified circles/indentified circle 6.png'
 img = cv.imread(img_path)
 
 # Check if the image is loaded correctly

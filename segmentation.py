@@ -3,7 +3,7 @@ import numpy as np
 import cv2 as cv
 
 # Function to detect circles in an image
-def detect_and_draw_circles(img):
+def detect_and_draw_circles(img, thickness = 20):
     #gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     #gray = cv.equalizeHist(gray)
     #gray = cv.medianBlur(gray, 11)

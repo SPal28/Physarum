@@ -28,8 +28,8 @@ if circles is not None:
     print(f"Number of detected circles: {num_circles}")
     for i in detected_circles[0, :]:
         x, y, r = i
-        cv.circle(output, (x, y), r, (0, 255, 0), 10)
-        cv.circle(output, (x, y), 2, (0, 255, 0), 10)
+        cv.circle(output, (x, y), r, (0, 255, 0), 4)
+        cv.circle(output, (x, y), 2, (0, 255, 0), 4)
 
     # Display the output image
     cv.imshow('output', output)
@@ -37,6 +37,6 @@ if circles is not None:
     cv.destroyAllWindows()
 
     # Optionally save the output image
-    cv.imwrite('/Users/subhangipal/Documents/Physarum/indentified circles/indentified circle 6.png', output)
+    cv.imwrite('/Users/subhangipal/Documents/Physarum/indentified circles', output)
 else:
     print("No circles were detected.")
