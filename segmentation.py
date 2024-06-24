@@ -3,11 +3,11 @@ import numpy as np
 import cv2 as cv
 
 # Function to detect circles in an image
-def detect_and_draw_circles(img, thickness = 20):
-    #gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    #gray = cv.equalizeHist(gray)
-    #gray = cv.medianBlur(gray, 11)
-    circles = cv.HoughCircles(img[:,:,2], cv.HOUGH_GRADIENT, dp=1.2, minDist=400,
+def detect_and_draw_circles(img):
+    gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    gray = cv.equalizeHist(gray)
+    gray = cv.medianBlur(gray, 11)
+    circles = cv.HoughCircles(gray, cv.HOUGH_GRADIENT, dp=1.2, minDist=400,
                               param1=100, param2=30, minRadius=200, maxRadius=400)
     if circles is not None:
         detected_circles = np.uint16(np.around(circles))
@@ -126,3 +126,4 @@ for filename in os.listdir(base_input_dir):
 
 print("Processing complete.")
 
+    
