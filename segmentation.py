@@ -88,42 +88,43 @@ for filename in os.listdir(base_input_dir):
         part_height = height // 3
         part_width = width // 2
 
+        # Define the order of parts for saving (top-left, middle-left, bottom-left, top-right, middle-right, bottom-right)
+        part_order = [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)]
+
         # Split the image into 6 parts based on the new dimensions and save to specific folders
-        for i in range(3):  # 3 rows
-            for j in range(2):  # 2 columns
-                y_start = i * part_height
-                y_end = (i + 1) * part_height
-                x_start = j * part_width
-                x_end = (j + 1) * part_width
+        for index, (i, j) in enumerate(part_order):  # Iterate through the defined order
+            y_start = i * part_height
+            y_end = (i + 1) * part_height
+            x_start = j * part_width
+            x_end = (j + 1) * part_width
 
-                # Ensure the end coordinates are within the image boundaries
-                y_end = min(y_end, height)
-                x_end = min(x_end, width)
+            # Ensure the end coordinates are within the image boundaries
+            y_end = min(y_end, height)
+            x_end = min(x_end, width)
 
-                part = img[y_start:y_end, x_start:x_end]
+            part = img[y_start:y_end, x_start:x_end]
 
-                # Check if the part has valid dimensions
-                if part.shape[0] == 0 or part.shape[1] == 0:
-                    print(f"Skipping empty part at ({i}, {j}) with coordinates: ({y_start}, {y_end}, {x_start}, {x_end})")
-                    continue
+            # Check if the part has valid dimensions
+            if part.shape[0] == 0 or part.shape[1] == 0:
+                print(f"Skipping empty part at ({i}, {j}) with coordinates: ({y_start}, {y_end}, {x_start}, {x_end})")
+                continue
 
-                # Calculate rotation angle
-                angle = calculate_rotation_angle(part)
-                part = rotate_image(part, angle)
+            # Calculate rotation angle
+            angle = calculate_rotation_angle(part)
+            part = rotate_image(part, angle)
 
-                folder_name = str(i*2+j+1)
-                folder_path = os.path.join(base_output_dir, folder_name)
-                os.makedirs(folder_path, exist_ok=True)
+            # Folder and file naming
+            folder_name = str(index + 1)  # Save as 1 to 6 based on the part order
+            folder_path = os.path.join(base_output_dir, folder_name)
+            os.makedirs(folder_path, exist_ok=True)
 
-                # Detect and draw circles in the split image
-                circles = detect_and_draw_circles(part)
+            # Detect and draw circles in the split image
+            circles = detect_and_draw_circles(part)
 
-                # Remove background outside the detected circle
-                result = remove_background(part, circles)
-                result_filename = os.path.join(folder_path, f'{filename}_part_{i*2+j+1}.png')
-                cv.imwrite(result_filename, result)
-                print(f"Background removed image saved to {result_filename}")
+            # Remove background outside the detected circle
+            result = remove_background(part, circles)
+            result_filename = os.path.join(folder_path, f'{folder_name}.png')
+            cv.imwrite(result_filename, result)
+            print(f"Background removed image saved to {result_filename}")
 
 print("Processing complete.")
-
-    
